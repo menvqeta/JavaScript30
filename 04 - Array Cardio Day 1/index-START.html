@@ -38,29 +38,84 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    const inventorsBornIn1500Century = inventors.filter(
+      function(inventor) {
+        return (1500 <= inventor.year) && (inventor.year < 1600);
+      }
+    );
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
+    const inventorsFirstAndLastName = inventors.map(
+      function(inventor) {
+        return `${inventor['first']} ${inventor['last']}`;
+      }
+    );
+
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
 
+    const sortedInventors = inventors.sort(
+      function(firstPerson, secondPerson) {
+        return firstPerson.year - secondPerson.year;
+      }
+    );
+
+
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
 
+    const totalYears = inventors.reduce(
+      function(total, inventor) {
+        let yearsLived = inventor.passed-inventor.year;
+        total += yearsLived;
+        return total;
+      },0
+    );
+
+
     // 5. Sort the inventors by years lived
+
+    const sortedInventorsByYearsLived = inventors.sort(
+      function(firstPerson, secondPerson) {
+        let yearsLivedByFirst = firstPerson.passed - firstPerson.year;
+        let yearsLivedBySecond = secondPerson.passed - secondPerson.year;
+        return yearsLivedByFirst-yearsLivedBySecond;
+      }
+    );
+
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
 
+    // let links = Array.from(document.querySelectorAll(".mw-category-group a"));
+    // let deNames = links.map(link => link.textContent).filter(text=> text.includes("de"));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
 
+    const sortedPeopleByLastName = people.sort(
+      function(firstPerson, secondPerson) {
+        let lastNameOfFirstPerson = firstPerson.split(",")[0];
+        let lastNameOfSecondPerson = secondPerson.split(",")[0];
+        return lastNameOfFirstPerson<=lastNameOfSecondPerson?-1: 1;
+      }
+    );
+
+
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
-
+    const freqMap = data.reduce(
+      function(map, item) {
+        if(!map[item]) {
+          map[item] = 0;
+        }
+        map[item]++;
+        return map;
+      },{}
+    );
+    console.log(freqMap);
   </script>
 </body>
 </html>
